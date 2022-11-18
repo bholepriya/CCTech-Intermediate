@@ -1,0 +1,115 @@
+#include <iostream>
+/* Test Cases:-
+1) input :- 123
+   output :- 123 132 312 321 123 132
+
+2) input :- biro
+   output :- biro bior boir bori biro bior ibor ibro irbo irob ibor ibro rbio rboi robi roib 
+			rbio rboi ibor ibro irbo irob ibor ibro
+
+3) input :- 2y3
+   output :- 2y3 23y y23 y32 3y2 32y
+
+4) input :- -563
+   output :- -563 -536 -653 -635 -365 -356
+
+5) input :- kl
+   output :- kl lk
+
+6) input :- o
+   output :- o
+
+7) input :- -jkl
+   output :- Please Enter valid input
+*/
+
+using namespace std;
+
+bool isNumAndNegative(string str)
+{
+	int p = 0;
+	for (int i = 1; i < str.length(); i++)
+	{
+		if (str[0] == '-' && str[i] >= '0' && str[i] <= '9')
+		{
+			p++;
+			continue;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	if (str[0] == '-' && p == str.length())
+	{
+		return true;
+	}
+
+}
+
+bool anagramFunction(string &str, int start, int last)
+{
+
+	if (isNumAndNegative(str))
+	{
+		if (start == last)
+		{
+			cout << str << " ";
+		}
+		else
+		{
+			for (int i = start; i <= last; i++)
+			{
+				 swap(str[start], str[i]);
+				anagramFunction(str, start + 1, last);
+				swap(str[start], str[i]);
+			}
+		}
+	}
+	else
+	{
+		if (str[0] == '-')
+		{
+			return false;
+		}
+		else
+		{
+			if (start == last)
+			{
+				cout << str << " ";
+			}
+			else
+			{
+				for (int i = start; i <= last; i++)
+				{
+					swap(str[start], str[i]);
+					anagramFunction(str, start + 1, last);
+					swap(str[start], str[i]);
+				}
+			}
+		}
+		
+	}
+	
+	return true;
+}
+
+int main()
+{
+	string str;
+	cout << "Enter a string :- ";
+	cin >> str;
+    int n = str.length();
+	if (isNumAndNegative(str))
+	{
+		anagramFunction(str, 1, n - 1);
+	}
+	else
+	{
+		if (!anagramFunction(str, 0, n - 1))
+		{
+			cout  << "Please Enter valid input";
+		}
+	}
+	
+}
