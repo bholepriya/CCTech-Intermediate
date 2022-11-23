@@ -1,0 +1,65 @@
+#include <iostream>
+#include <cmath>
+#include <iomanip>
+#include <float.h>
+#include <limits.h>
+
+
+/*The NaN values are used to identify undefined or non-representable values for 
+floating-point elements, such as the square root of negative numbers or the result of 0/0.
+*/
+
+/*
+ **** Log2x :- Log base 2 is the power to which the number 2 must be raised to obtain the value of n.
+  For any real number x, log base 2 functions are written as
+                                                x = log2 n
+
+    Which is equal to           :-  2^x = n
+*/
+using namespace std;
+void convertFloatToInteger(float floatValue)
+{
+     int integerValue;
+   
+    if (isnan(floatValue) ||size_t(INT_MAX) < log2f(fabsf(floatValue)) || (floatValue != 0.0F && fabsf(floatValue) < FLT_MIN))
+    {
+        throw runtime_error("conversion failed");
+    }
+    else
+    {
+        integerValue = floatValue;
+        cout<<integerValue<<endl;
+    }
+}
+void converIntegerToFloat(int integerValue)
+{
+    float floatValue;
+    if (isnan(integerValue) ||size_t(FLT_MAX) < log2f(abs(integerValue)) || (integerValue != 0 && abs(integerValue) < INT_MIN))
+    {
+        throw runtime_error("conversion failed");
+    }
+     else
+    {
+        floatValue= integerValue ;
+        cout<<setprecision(3)<<floatValue<<endl;
+    }
+}
+int main()
+{
+    cout<<fixed;
+    convertFloatToInteger(78965.12365498665);
+    convertFloatToInteger(78965);
+    converIntegerToFloat(2145);
+    converIntegerToFloat(21.45);
+    return 0;
+}
+
+/*
+Output:-
+
+78965
+78965
+2145.000
+21.000
+
+*/
