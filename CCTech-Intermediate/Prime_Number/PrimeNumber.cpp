@@ -1,0 +1,43 @@
+
+#include <cassert>
+#include<iostream>
+
+using namespace std;
+
+bool isPrime(int number)
+{
+    if (number < 0)
+    {
+        return false;
+    }
+    if (number == 0 || number == 1)
+    {
+        return false;
+    }
+    else if (number == 2)
+    {
+        return true;
+    }
+    else
+    {
+        for (int i = 2; i < number / 2; i++)
+        {
+            if (number % i == 0)
+            {
+                return false;
+            }
+        }
+    }
+    return true;
+
+}
+
+int main()
+{
+	assert(!isPrime(-1));
+	assert(!isPrime(0));
+	assert(!isPrime(1));
+	assert(isPrime(2));
+	assert(isPrime(3));
+	assert(isPrime(4));
+}
